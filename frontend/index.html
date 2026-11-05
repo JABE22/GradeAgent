@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GradeAgent</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header><h1>Grade<span>Agent</span></h1><p>Automated grading of Python &amp; Jupyter submissions</p></header>
+  <main>
+    <section class="card">
+      <h2>Upload submission</h2>
+      <form id="upload">
+        <input type="file" name="file" accept=".ipynb,.py" required>
+        <div class="grid">
+          <input name="student" placeholder="Student (auto-detected if empty)">
+          <input name="group" placeholder="Group">
+          <input name="course" placeholder="Course">
+          <input name="workshop" placeholder="Workshop">
+          <select name="engine" id="engine"></select>
+        </div>
+        <button>Upload &amp; grade</button>
+        <p id="msg"></p>
+      </form>
+    </section>
+    <section class="stats" id="totals"></section>
+    <section class="card">
+      <h2>Students</h2>
+      <table id="students"><thead><tr><th>Student</th><th>Group</th><th>Submissions</th><th>Criteria averages</th><th>Proposed course score</th></tr></thead><tbody></tbody></table>
+    </section>
+    <section class="card">
+      <h2>Submissions</h2>
+      <table id="subs"><thead><tr><th>Date</th><th>Student</th><th>Course / Workshop</th><th>Rubric</th><th>Score</th></tr></thead><tbody></tbody></table>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
