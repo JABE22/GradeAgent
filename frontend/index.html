@@ -3,36 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GradeAgent</title>
+  <meta name="theme-color" content="#f6f7fb">
+  <title>GradeAgent — Notebook review</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header><h1>Grade<span>Agent</span></h1><p>Automated grading of Python &amp; Jupyter submissions</p></header>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="GradeAgent home">Grade<span>Agent</span></a>
+    <span class="local-badge"><i></i> Local preview</span>
+  </header>
   <main>
-    <section class="card">
-      <h2>Upload submission</h2>
-      <form id="upload">
-        <input type="file" name="file" accept=".ipynb,.py" required>
-        <div class="grid">
-          <input name="student" placeholder="Student (auto-detected if empty)">
-          <input name="group" placeholder="Group">
-          <input name="course" placeholder="Course">
-          <input name="workshop" placeholder="Workshop">
-          <select name="engine" id="engine"></select>
+    <section class="intro">
+      <p class="eyebrow">COURSE WORKSPACE / OVERVIEW</p>
+      <h1>Notebook review</h1>
+      <p>Collect Python notebooks and keep workshop submissions in one place.</p>
+    </section>
+
+    <section class="stats" aria-label="Submission summary">
+      <article class="stat-card">
+        <span class="stat-label">Notebooks uploaded</span>
+        <strong id="submission-count" aria-live="polite">0</strong>
+        <span class="stat-note">This session</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">Score per notebook</span>
+        <strong>100<span class="points">/100</span></strong>
+        <span class="stat-note">Demo score</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">Course structure</span>
+        <strong class="structure">Lectures <span>+</span> workshops</strong>
+        <span class="stat-note">Reusable across courses</span>
+      </article>
+    </section>
+
+    <section class="panel upload-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">NEW SUBMISSION</p>
+          <h2>Upload notebooks</h2>
         </div>
-        <button>Upload &amp; grade</button>
-        <p id="msg"></p>
+        <span class="step">01 <span>/ 01</span></span>
+      </div>
+      <form id="upload-form">
+        <label class="file-picker" for="notebooks">
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <span class="picker-title">Choose Jupyter notebooks</span>
+          <span class="picker-hint">Select one or more <code>.ipynb</code> files</span>
+          <input id="notebooks" name="notebooks" type="file" accept=".ipynb,application/x-ipynb+json" multiple required>
+        </label>
+        <div class="form-row">
+          <label>
+            <span>Course <span class="optional">Optional</span></span>
+            <input id="course" name="course" placeholder="e.g. Machine Learning">
+          </label>
+          <label>
+            <span>Lecture or workshop <span class="optional">Optional</span></span>
+            <input id="workshop" name="workshop" placeholder="e.g. Workshop 01">
+          </label>
+          <button type="submit">Add notebooks <span aria-hidden="true">→</span></button>
+        </div>
+        <p id="upload-message" class="message" role="status">Files stay in this browser session; no database is used.</p>
       </form>
     </section>
-    <section class="stats" id="totals"></section>
-    <section class="card">
-      <h2>Students</h2>
-      <table id="students"><thead><tr><th>Student</th><th>Group</th><th>Submissions</th><th>Criteria averages</th><th>Proposed course score</th></tr></thead><tbody></tbody></table>
+
+    <section class="panel submissions-panel">
+      <div class="panel-heading list-heading">
+        <div>
+          <p class="eyebrow">RECENT ACTIVITY</p>
+          <h2>Submissions</h2>
+        </div>
+        <button id="clear-submissions" class="text-button" type="button" disabled>Clear session</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Notebook</th><th scope="col">Course / session</th><th scope="col">Added</th><th scope="col">Score</th></tr>
+          </thead>
+          <tbody id="submission-list"></tbody>
+        </table>
+        <p id="empty-state" class="empty-state">Your uploaded notebooks will appear here.</p>
+      </div>
     </section>
-    <section class="card">
-      <h2>Submissions</h2>
-      <table id="subs"><thead><tr><th>Date</th><th>Student</th><th>Course / Workshop</th><th>Rubric</th><th>Score</th></tr></thead><tbody></tbody></table>
-    </section>
+    <p class="prototype-note">Prototype only: scores are placeholders, and the list clears when this page is refreshed.</p>
   </main>
   <script src="app.js"></script>
 </body>
