@@ -35,3 +35,48 @@
 ## Suggested approach
 
 Build the foundations first, then deliver course management and submissions before expanding into learning tools. Keep student data protected and clearly mark automated grades as proposals.
+
+
+```mermaid
+flowchart TD
+    Home[Home page] --> Teacher[Teacher area]
+    Home --> Student[Student area]
+
+    Teacher --> Dashboard[Teacher dashboard]
+    Dashboard --> Courses[Course management]
+    Dashboard --> Submissions[Workshop submissions]
+    Dashboard --> Grading[Notebook grading]
+    Dashboard --> Review[Grade review]
+    Dashboard --> Progress[Progress & exports]
+
+    Courses --> CourseYear[Course year]
+    CourseYear --> Students[Students & groups]
+    CourseYear --> Materials[Course materials]
+    CourseYear --> Workshops[Workshops]
+    Workshops --> Submissions
+
+    Student --> StudentDashboard[Student course dashboard]
+    StudentDashboard --> StudentMaterials[Materials]
+    StudentDashboard --> StudentSubmissions[Submissions]
+    StudentDashboard --> StudentProgress[Progress]
+
+    StudentDashboard --> Tutor[Course-aware AI tutor]
+    StudentDashboard --> Guidance[Personalized guidance]
+    StudentDashboard --> Activities[Interactive activities]
+    StudentDashboard --> Theory[Theory exercises]
+    StudentDashboard --> Practice[Exam practice]
+    StudentDashboard --> Exams[Exams]
+
+    Submissions --> Grading
+    Grading --> Review
+    Review --> Progress
+
+    DB[(SQLite database)]
+    Users[Users & roles]
+    DB --> Users
+    DB --> Courses
+    DB --> CourseYear
+    DB --> Submissions
+    DB --> Materials
+    DB --> Exams
+```
